@@ -11,3 +11,7 @@ $payload=array('sub'=>'1234567890','name'=>'John Doe','iat'=>1516239022);
 $jwt=new GuoJwt();
 $token=$jwt->getToken($payload);
 var_dump($token);
+
+$jwt2=new GuoJwt('GuoShiXin');
+$getPayload=$jwt2->verifyToken($token);
+var_dump($getPayload);

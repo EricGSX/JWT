@@ -15,8 +15,16 @@ class GuoJwt {
     ];
 
     //使用HMAC生成信息摘要时所使用的密钥
-    private static $key='123456';
+    private static $key='';
 
+    public function __construct (string $key='')
+    {
+        if($key){
+            self::$key = $key;
+        }else{
+            self::$key = 'GuoShiXin';
+        }
+    }
 
     /**
      * 获取jwt token
