@@ -1,0 +1,15 @@
+{
+    "name": "gsx/jwt",
+    "description": "PHP生成、验证 JWT",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "GuoShiXin",
+            "email": "guoshixin@guosx.com",
+            "homepage":"https://www.guosx.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
