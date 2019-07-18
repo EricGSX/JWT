@@ -1,5 +1,5 @@
 {
-    "name": "gsx/jwt",
+    "name": "gsx/jwt-php",
     "description": "PHP生成、验证 JWT",
     "type": "library",
     "license": "MIT",
