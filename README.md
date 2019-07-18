@@ -9,7 +9,7 @@ PHP生成、验证JWT
  $payload=array('sub'=>'1234567890','name'=>'Guo','iat'=>1516239022);
  $token=$jwt->getToken($payload);
  ~~~
- #### 验证token合法性
+ #### 验证JWT合法性
  ~~~
  $jwt2=new GuoJwt($key);
  $getPayload=$jwt2->verifyToken($token);
