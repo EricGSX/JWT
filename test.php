@@ -7,7 +7,7 @@
  */
 require('autoload.php');
 use Jwt\GuoJwt;
-$payload=array('sub'=>'1234567890','name'=>'John Doe','iat'=>1516239022);
+$payload=array('sub'=>'1234567890','name'=>'Guo','iat'=>1516239022);
 $jwt=new GuoJwt();
 $token=$jwt->getToken($payload);
 var_dump($token);
