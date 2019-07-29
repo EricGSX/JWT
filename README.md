@@ -16,3 +16,9 @@ PHP生成、验证JWT
  var_dump($getPayload);
  ~~~
  
+ 这里需要引入一下，否则会报错class不存在
+ ~~~
+         "files": [
+             "vendor/gsx/jwt-php/autoload.php"
+         ]
+ ~~~
