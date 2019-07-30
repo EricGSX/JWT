@@ -60,40 +60,40 @@ class GuoJwt {
      */
     public static function verifyToken(string $Token)
     {
-        try{
-            $tokens = explode('.', $Token);
-            if (count($tokens) != 3)
-                return json_encode(['code'=>403,'msg'=>'JWT illegal']);
-
-            list($base64header, $base64payload, $sign) = $tokens;
-
-            //获取jwt算法
-            $base64decodeheader = json_decode(self::base64UrlDecode($base64header), JSON_OBJECT_AS_ARRAY);
-            if (empty($base64decodeheader['alg']))
-                return json_encode(['code'=>403,'msg'=>'JWT illegal']);
-
-            //签名验证
-            if (self::signature($base64header . '.' . $base64payload, self::$key, $base64decodeheader['alg']) !== $sign)
-                return json_encode(['code'=>403,'msg'=>'JWT illegal']);
-
-            $payload = json_encode(self::base64UrlDecode($base64payload), JSON_OBJECT_AS_ARRAY);
-
-            //签发时间大于当前服务器时间验证失败
-            if (isset($payload['iat']) && $payload['iat'] > time())
-                return json_encode(['code'=>403,'msg'=>'JWT illegal']);
-
-            //过期时间小宇当前服务器时间验证失败
-            if (isset($payload['exp']) && $payload['exp'] < time())
-                return json_encode(['code'=>403,'msg'=>'JWT stale dated']);
-
-            //该nbf时间之前不接收处理该Token
-            if (isset($payload['nbf']) && $payload['nbf'] > time())
-                return json_encode(['code'=>403,'msg'=>'JWT Not available time']);
-
-            return $payload;
-        }catch (\Exception $e){
-            return $e->getMessage();
+        $tokens = explode('.', $Token);
+        if (count($tokens) != 3){
+            return json_encode(['code'=>403,'msg'=>'JWT illegal']);
         }
+
+
+        list($base64header, $base64payload, $sign) = $tokens;
+
+        //获取jwt算法
+        $base64decodeheader = json_decode(self::base64UrlDecode($base64header), JSON_OBJECT_AS_ARRAY);
+        if (empty($base64decodeheader['alg'])){
+            return json_encode(['code'=>403,'msg'=>'JWT illegal']);
+        }
+
+        //签名验证
+        if (self::signature($base64header . '.' . $base64payload, self::$key, $base64decodeheader['alg']) !== $sign){
+            return json_encode(['code'=>403,'msg'=>'JWT illegal']);
+        }
+
+        $payload = json_decode(self::base64UrlDecode($base64payload), JSON_OBJECT_AS_ARRAY);
+        //签发时间大于当前服务器时间验证失败
+        if (isset($payload['iat']) && $payload['iat'] > time()){
+            return json_encode(['code'=>403,'msg'=>'JWT illegal']);
+        }
+
+        //过期时间小宇当前服务器时间验证失败
+        if (isset($payload['exp']) && $payload['exp'] < time()){
+            return json_encode(['code'=>403,'msg'=>'JWT stale dated']);
+        }
+        //该nbf时间之前不接收处理该Token
+        if (isset($payload['nbf']) && $payload['nbf'] > time()){
+            return json_encode(['code'=>403,'msg'=>'JWT Not available time']);
+        }
+        return $payload;
     }
 
 
